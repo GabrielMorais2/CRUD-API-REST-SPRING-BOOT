@@ -15,10 +15,11 @@ import org.springframework.web.bind.annotation.RestController;
 public class PacienteController {
 
     @Autowired
-    private PacienteRepository repositoy;
+    private PacienteRepository repository;
 
     @PostMapping
     public void Cadastrar(@RequestBody @Valid DadosCadastroPaciente dadosPacientes){
-        repositoy.save(new Paciente(dadosPacientes));
+        repository.save(new Paciente(dadosPacientes));
     }
+
 }
