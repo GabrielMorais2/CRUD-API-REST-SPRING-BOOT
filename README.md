@@ -14,7 +14,7 @@ Enquanto um time de desenvolvimento será responsável pelo aplicativo mobile, o
 * Java 17
 * Spring Boot 3
 * Maven
-* MySQL
+* MariaDB
 * Hibernate
 * Flyway
 * Lombok
