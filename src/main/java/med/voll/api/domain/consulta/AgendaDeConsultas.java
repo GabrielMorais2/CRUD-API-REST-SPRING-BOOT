@@ -1,7 +1,7 @@
 package med.voll.api.domain.consulta;
 
 import med.voll.api.domain.medico.Medico;
-import med.voll.api.domain.medico.MedicoRepositoy;
+import med.voll.api.domain.medico.MedicoRepository;
 import med.voll.api.domain.paciente.PacienteRepository;
 import med.voll.api.domain.validacoes.agendamentos.ValidadorAgendamentoDeConsulta;
 import med.voll.api.domain.validacoes.cancelamentos.ValidadorCancelamentoDeConsulta;
@@ -26,7 +26,7 @@ public class AgendaDeConsultas {
     private ConsultaRepository consultaRepository;
 
     @Autowired
-    private MedicoRepositoy medicoRepositoy;
+    private MedicoRepository medicoRepository;
 
     @Autowired
     private PacienteRepository pacienteRepository;
@@ -45,7 +45,7 @@ public class AgendaDeConsultas {
             throw new ValidacaoException("O Id do paciente informado não existe");
         }
 
-        if(dados.idMedico() != null && !medicoRepositoy.existsById(dados.idMedico())) {
+        if(dados.idMedico() != null && !medicoRepository.existsById(dados.idMedico())) {
             throw new ValidacaoException("O Id do medico informado não existe");
         }
 
@@ -66,14 +66,14 @@ public class AgendaDeConsultas {
 
     private Medico escolherMedico(DadosAgendamentoConsulta dados) {
         if(dados.idMedico() != null){
-            return medicoRepositoy.getReferenceById(dados.idMedico());
+            return medicoRepository.getReferenceById(dados.idMedico());
         }
 
         if(dados.especialidade() == null){
             throw new ValidacaoException("Especialidade é obrigatoria quando o médico não for escolhido");
         }
 
-        return medicoRepositoy.escolherMedicoAleatorioLivreNaData(dados.especialidade(), dados.data());
+        return medicoRepository.escolherMedicoAleatorioLivreNaData(dados.especialidade(), dados.data());
     }
 
     public void cancelar(DadosCancelamentoConsulta dados) {

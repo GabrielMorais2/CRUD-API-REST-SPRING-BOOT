@@ -18,7 +18,7 @@ import org.springframework.web.util.UriComponentsBuilder;
 public class MedicoController {
 
     @Autowired
-    private MedicoRepositoy repository;
+    private MedicoRepository repository;
     @PostMapping
     @Transactional
     public ResponseEntity post(@RequestBody @Valid DadosCadastroMedico dadosMedico, UriComponentsBuilder uriBuilder){

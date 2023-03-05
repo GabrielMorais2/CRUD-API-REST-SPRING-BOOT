@@ -1,7 +1,7 @@
 package med.voll.api.domain.validacoes.agendamentos;
 
 import med.voll.api.domain.consulta.DadosAgendamentoConsulta;
-import med.voll.api.domain.medico.MedicoRepositoy;
+import med.voll.api.domain.medico.MedicoRepository;
 import med.voll.api.infra.exception.ValidacaoException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -10,7 +10,7 @@ import org.springframework.stereotype.Component;
 public class ValidaMedicoInativo implements ValidadorAgendamentoDeConsulta {
 
     @Autowired
-    private MedicoRepositoy medicoRepositoy;
+    private MedicoRepository medicoRepository;
 
     public void validar(DadosAgendamentoConsulta dados){
         //escolha do medico opcional
@@ -19,7 +19,7 @@ public class ValidaMedicoInativo implements ValidadorAgendamentoDeConsulta {
             return;
         }
 
-        var medicoEstaAtivo = medicoRepositoy.findAtivoById(dados.idMedico());
+        var medicoEstaAtivo = medicoRepository.findAtivoById(dados.idMedico());
 
         if(!medicoEstaAtivo){
             throw new ValidacaoException("Médico não está ativo");
